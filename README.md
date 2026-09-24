@@ -1,4 +1,4 @@
-# Glean Trace Lens
+# Glean Trace Debugger
 
 An unpacked Chrome/Edge Manifest V3 extension for inspecting a saved Glean chat with `debugMode=1`.
 
@@ -7,7 +7,7 @@ An unpacked Chrome/Edge Manifest V3 extension for inspecting a saved Glean chat 
 1. Open `chrome://extensions` (or `edge://extensions`).
 2. Enable **Developer mode**.
 3. Choose **Load unpacked** and select the `extension` folder in this repository.
-4. Open a saved chat at `app.glean.com`, then click the Trace Lens toolbar button.
+4. Open a saved chat at `app.glean.com`, then click the Glean Trace Debugger toolbar button.
 
 The extension opens a debugger window and a temporary inactive collector tab. It attaches to the collector before navigating to the chat's debug URL, captures supported network response bodies, and closes the collector when the capture finishes. It keeps recognized trace data in `chrome.storage.session` and does not send it to an external service.
 

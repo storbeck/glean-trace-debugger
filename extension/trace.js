@@ -3,7 +3,7 @@
 export function debugUrl(source) {
   const u = new URL(source);
   if (u.protocol !== 'https:' || u.hostname !== 'app.glean.com' || !/^\/chat\/[\w-]+\/?$/.test(u.pathname) || /^\/chat\/(agents|new)\/?$/.test(u.pathname)) {
-    throw new Error('Open a saved chat on app.glean.com, then click Trace Lens.');
+    throw new Error('Open a saved chat on app.glean.com, then click Glean Trace Debugger.');
   }
   u.searchParams.set('debugMode', '1');
   return u.href;

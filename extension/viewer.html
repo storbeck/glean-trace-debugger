@@ -2,11 +2,11 @@
 <html lang="en">
 <head>
   <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>Trace Lens · Glean debugger</title><link rel="stylesheet" href="viewer.css">
+  <title>Glean Trace Debugger</title><link rel="stylesheet" href="viewer.css">
 </head>
 <body>
   <header class="masthead">
-    <div class="brand"><span class="brand-mark" aria-hidden="true">≋</span><div><strong>TRACE LENS</strong><span>Glean execution inspector</span></div></div>
+    <div class="brand"><span class="brand-mark" aria-hidden="true">≋</span><div><strong>TRACE DEBUGGER</strong><span>Glean execution inspector</span></div></div>
     <div class="header-actions"><span class="local-label"><i></i> LOCAL SESSION</span><button id="import">Import trace</button><button id="export" disabled>Export JSON ↗</button></div>
   </header>
   <main>
@@ -42,8 +42,8 @@
     </section>
     <details class="diagnostics"><summary>Capture diagnostics <span id="diagnostic-count">0 events</span></summary><p>Endpoint paths and recognized payload shapes. No request headers are collected. A captured trace may omit details that Glean loads only when selected.</p><pre id="diagnostic-log">No events.</pre></details>
   </main>
-  <footer class="app-footer"><span>TRACE LENS <b>/</b> 0.1</span><span>Stored in this browser session · No external service</span></footer>
-  <dialog id="import-dialog"><form method="dialog"><div class="eyebrow">BRING YOUR OWN TRACE</div><h2>Import trace data</h2><p>Paste Glean’s copied <strong>All Attributes</strong>, a JSON response, an OTLP trace, or a Trace Lens export.</p><label class="file-input">Choose JSON file <input id="file" type="file" accept=".json,.jsonl,.ndjson,application/json"></label><label for="import-text">Or paste JSON</label><textarea id="import-text" rows="9" placeholder='{"spans": […]}' spellcheck="false"></textarea><div class="dialog-actions"><button value="cancel">Cancel</button><button id="load-import" type="button" class="primary">Open trace →</button></div><p id="import-error" role="alert"></p></form></dialog>
+  <footer class="app-footer"><span>TRACE DEBUGGER <b>/</b> 0.1</span><span>Stored in this browser session · No external service</span></footer>
+  <dialog id="import-dialog"><form method="dialog"><div class="eyebrow">BRING YOUR OWN TRACE</div><h2>Import trace data</h2><p>Paste Glean’s copied <strong>All Attributes</strong>, a JSON response, an OTLP trace, or a Glean Trace Debugger export.</p><label class="file-input">Choose JSON file <input id="file" type="file" accept=".json,.jsonl,.ndjson,application/json"></label><label for="import-text">Or paste JSON</label><textarea id="import-text" rows="9" placeholder='{"spans": […]}' spellcheck="false"></textarea><div class="dialog-actions"><button value="cancel">Cancel</button><button id="load-import" type="button" class="primary">Open trace →</button></div><p id="import-error" role="alert"></p></form></dialog>
   <script type="module" src="viewer.js"></script>
 </body>
 </html>

@@ -136,7 +136,7 @@ $('load-import').onclick=()=>{try{if($('import-text').value.length>12*1024*1024)
 $('export').onclick=()=>run(()=>{
   const data=redact({traceLensVersion:1,exportedAt:new Date().toISOString(),coverage:'unverified',sample:Boolean(capture.demo),spans:capture.spans.map(s=>s.raw)});
   const url=URL.createObjectURL(new Blob([JSON.stringify(data,null,2)],{type:'application/json'}));
-  const a=el('a');a.href=url;a.download=`trace-lens-${capture.demo?'sample':new Date().toISOString().slice(0,10)}.json`;document.body.append(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),1000);
+  const a=el('a');a.href=url;a.download=`glean-trace-debugger-${capture.demo?'sample':new Date().toISOString().slice(0,10)}.json`;document.body.append(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),1000);
 });
 render();
 if(params.has('demo'))loadLocal(JSON.stringify(demoPayload()),true);
