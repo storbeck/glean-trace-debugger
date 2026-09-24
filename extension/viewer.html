@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Trace Lens · Glean debugger</title><link rel="stylesheet" href="viewer.css">
+</head>
+<body>
+  <header class="masthead">
+    <div class="brand"><span class="brand-mark" aria-hidden="true">≋</span><div><strong>TRACE LENS</strong><span>Glean execution inspector</span></div></div>
+    <div class="header-actions"><span class="local-label"><i></i> LOCAL SESSION</span><button id="import">Import trace</button><button id="export" disabled>Export JSON ↗</button></div>
+  </header>
+  <main>
+    <section class="overview" aria-labelledby="run-title">
+      <div class="run-name"><div class="eyebrow" id="context">EXECUTION / WAITING</div><h1 id="run-title">Follow every step.</h1><p id="subtitle">Open a saved Glean chat and click the extension to inspect its execution.</p></div>
+      <dl class="metrics"><div><dt>ELAPSED</dt><dd id="duration">—</dd></div><div><dt>SPANS</dt><dd id="count">—</dd></div><div><dt>ERRORS</dt><dd id="errors">—</dd></div></dl>
+    </section>
+    <section class="capture-strip" aria-label="Capture status">
+      <span class="state-pill" id="state">READY</span><span id="status" role="status">No capture loaded.</span>
+      <div class="capture-actions"><button id="collector" hidden>Open collector</button><button id="stop" hidden>Stop</button><button id="retry" hidden>Capture again</button><button id="clear" hidden>Clear</button></div>
+    </section>
+    <div id="notice" class="notice" role="alert" hidden></div>
+    <section class="workspace" aria-label="Trace explorer">
+      <div class="trace-pane">
+        <div class="toolbar">
+          <label class="search"><span aria-hidden="true">⌕</span><input id="search" type="search" placeholder="Find a span…" aria-label="Find a span"></label>
+          <select id="trace-select" aria-label="Select trace"><option value="">All traces</option></select>
+          <select id="kind" aria-label="Span type"><option value="">All types</option><option value="agent">Agent</option><option value="model">Model</option><option value="tool">Tool</option><option value="retrieval">Retrieval</option><option value="other">Other</option></select>
+          <label class="error-filter"><input id="error-only" type="checkbox"> Errors</label>
+        </div>
+        <div class="timeline-controls"><span class="section-label">EXECUTION WATERFALL</span><div><button id="expand">Expand all</button><label>Zoom <input id="zoom" type="range" min="1" max="4" step="0.5" value="1" aria-label="Timeline zoom"></label></div></div>
+        <div class="timeline-scroll" id="timeline-scroll"><div id="timeline" class="timeline" role="list" aria-label="Execution spans"></div></div>
+        <div class="empty" id="empty"><span class="empty-symbol" aria-hidden="true">⌁</span><h2>Your execution, unpacked.</h2><p>Model calls, tools, and their payloads belong together. Capture a chat or import a trace to begin.</p><button id="demo">Explore a sample trace →</button></div>
+        <div class="trace-footer"><div class="legend"><span><i class="agent"></i>Agent</span><span><i class="model"></i>Model</span><span><i class="tool"></i>Tool</span><span><i class="other"></i>Other</span></div><span id="coverage">Server timings only</span></div>
+      </div>
+      <aside class="inspector" aria-label="Selected span">
+        <div class="inspector-heading"><div class="eyebrow">SPAN INSPECTOR</div><h2 id="span-name">Select a step</h2><div id="span-meta" class="span-meta">Explore the input, output, and context of any operation.</div></div>
+        <div class="detail-tabs" role="tablist" aria-label="Span details"><button role="tab" aria-selected="true" id="tab-input" data-tab="input" aria-controls="payload">Input</button><button role="tab" aria-selected="false" id="tab-output" data-tab="output" aria-controls="payload" tabindex="-1">Output</button><button role="tab" aria-selected="false" id="tab-attributes" data-tab="attributes" aria-controls="payload" tabindex="-1">Attributes</button><button role="tab" aria-selected="false" id="tab-raw" data-tab="raw" aria-controls="payload" tabindex="-1">Raw</button></div>
+        <div class="payload-toolbar"><span id="payload-label">NO SPAN SELECTED</span><button id="copy" disabled>Copy</button></div>
+        <pre id="payload" role="tabpanel" aria-labelledby="tab-input" tabindex="0">Select a span in the waterfall.</pre>
+        <div class="span-identity" id="span-identity"></div>
+      </aside>
+    </section>
+    <details class="diagnostics"><summary>Capture diagnostics <span id="diagnostic-count">0 events</span></summary><p>Endpoint paths and recognized payload shapes. No request headers are collected. A captured trace may omit details that Glean loads only when selected.</p><pre id="diagnostic-log">No events.</pre></details>
+  </main>
+  <footer class="app-footer"><span>TRACE LENS <b>/</b> 0.1</span><span>Stored in this browser session · No external service</span></footer>
+  <dialog id="import-dialog"><form method="dialog"><div class="eyebrow">BRING YOUR OWN TRACE</div><h2>Import trace data</h2><p>Paste Glean’s copied <strong>All Attributes</strong>, a JSON response, an OTLP trace, or a Trace Lens export.</p><label class="file-input">Choose JSON file <input id="file" type="file" accept=".json,.jsonl,.ndjson,application/json"></label><label for="import-text">Or paste JSON</label><textarea id="import-text" rows="9" placeholder='{"spans": […]}' spellcheck="false"></textarea><div class="dialog-actions"><button value="cancel">Cancel</button><button id="load-import" type="button" class="primary">Open trace →</button></div><p id="import-error" role="alert"></p></form></dialog>
+  <script type="module" src="viewer.js"></script>
+</body>
+</html>

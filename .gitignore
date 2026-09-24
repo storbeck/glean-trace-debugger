@@ -1,0 +1,32 @@
+# Dependencies and build output
+node_modules/
+dist/
+build/
+coverage/
+
+# Local browser-extension artifacts
+*.crx
+*.zip
+*.pem
+*.log
+
+# Local trace exports and captured payloads
+*.trace.json
+*.trace.ndjson
+trace-*.json
+captures/
+
+# OS and editor files
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Environment and secrets
+.env
+.env.*
+!.env.example
