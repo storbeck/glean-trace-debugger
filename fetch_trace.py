@@ -6,7 +6,13 @@ import subprocess
 import sys
 
 
-def export_chat(chat_id: str) -> None:
+def fetch_trace(chat_id: str) -> dict:
+    """Fetch a Glean conversation trace and return it as a dict.
+
+    Authentication is handled by the `glean` CLI. Raises ValueError for a
+    malformed ID and RuntimeError if the CLI is missing, the call fails, or
+    the response is unexpected.
+    """
     if not re.fullmatch(r"[a-fA-F0-9]{32}", chat_id):
         raise ValueError("Expected a 32-character hexadecimal conversation ID.")
 
@@ -51,9 +57,7 @@ def export_chat(chat_id: str) -> None:
             "The response did not contain the requested conversation."
         )
 
-    # The conversation JSON goes to stdout so it can be redirected to a file.
-    json.dump(data, sys.stdout, indent=2, ensure_ascii=False)
-    sys.stdout.write("\n")
+    return data
 
 
 def main():
@@ -71,10 +75,14 @@ def main():
     args = parser.parse_args()
 
     try:
-        export_chat(args.chat_id)
+        data = fetch_trace(args.chat_id)
     except (ValueError, RuntimeError) as exc:
         print(f"Error: {exc}", file=sys.stderr)
         sys.exit(1)
+
+    # The CLI entry point prints to stdout so it can be redirected to a file.
+    json.dump(data, sys.stdout, indent=2, ensure_ascii=False)
+    sys.stdout.write("\n")
 
 
 if __name__ == "__main__":
