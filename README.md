@@ -33,6 +33,30 @@ python3 fetch_trace.py <chat_id> | jq .       # pipe elsewhere
 Errors go to stderr with a non-zero exit code, so a redirect won't capture an
 error as if it were data.
 
+## Waterfall viewer (TUI)
+
+`trace_tui.py` is a terminal UI that renders a trace as a waterfall (spans on
+the left, ordered by start time and sized by duration) with full per-span
+details on the right — fragments, tool inputs, `actionExecutionRequest`
+payloads, status transitions, and metadata.
+
+It needs [Textual](https://textual.textualize.io/):
+
+```sh
+python3 -m venv .venv
+source .venv/bin/activate
+pip install -r requirements.txt
+```
+
+Point it at a saved trace, or pipe one straight from `fetch_trace.py`:
+
+```sh
+python3 trace_tui.py trace.json
+python3 fetch_trace.py <chat_id> | python3 trace_tui.py
+```
+
+Use ↑/↓ (or j/k) to move between spans; `q` to quit.
+
 ## Use as a module
 
 `fetch_trace()` returns the parsed JSON as a dict:
