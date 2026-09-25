@@ -1,20 +1,28 @@
-# Dependencies and build output
-node_modules/
-dist/
-build/
-coverage/
-
-# Local browser-extension artifacts
-*.crx
-*.zip
+# Environment and secrets
+.env
+.env.*
 *.pem
-*.log
+*.key
 
-# Local trace exports and captured payloads
+# Glean exports and captured payloads (contain private conversation data)
+glean-trace-*.json
 *.trace.json
 *.trace.ndjson
 trace-*.json
 captures/
+exports/
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# Logs
+*.log
 
 # OS and editor files
 .DS_Store
@@ -25,8 +33,3 @@ captures/
 .vscode/
 *.swp
 *.swo
-
-# Environment and secrets
-.env
-.env.*
-!.env.example

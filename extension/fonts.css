@@ -1,3 +1,0 @@
-/* Local fonts only: the extension never fetches fonts or other remote assets. */
-@font-face{font-family:'Lens Sans';src:local('Avenir Next'),local('Avenir'),local('Trebuchet MS');font-weight:100 900}
-@font-face{font-family:'Lens Mono';src:local('SFMono-Regular'),local('Menlo'),local('Consolas');font-weight:100 900}
